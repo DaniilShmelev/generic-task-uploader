@@ -4,10 +4,10 @@ parameters:
   default: microsoft/google-play-vsts-extension
 - name: branch
   displayName: The branch to take the task code from
-  default: master
+  default: users/DaniilShmelev/GooglePlayReleaseV4-test
 - name: task
   displayName: The task to build and upload
-  type: string
+  default: GooglePlayReleaseV4
 - name: collection
   displayName: URL of the collection the task will be uploaded to
   default: https://abtttestorg.visualstudio.com/DefaultCollection
