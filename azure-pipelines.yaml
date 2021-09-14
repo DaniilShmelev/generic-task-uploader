@@ -1,0 +1,38 @@
+parameters:
+- name: repo
+  displayName: The repository to take the task code from
+  default: microsoft/google-play-vsts-extension
+- name: branch
+  displayName: The branch to take the task code from
+  default: master
+- name: task
+  displayName: The task to build and upload
+  type: string
+
+trigger: none
+
+pool:
+  vmImage: ubuntu-20.04
+
+resources:
+  repositories:
+  - repository: targetRepo
+    type: github
+    endpoint: DaniilShmelev
+    name: ${{ parameters.repo }}
+
+steps:
+- checkout: self
+- checkout: targetRepo
+- task: NodeTool@0
+  inputs:
+    versionSpec: '15.x'
+- bash: |
+    sudo npm i -g tfx-cli
+    tfx login --service-url https://v-dshmelev.visualstudio.com/DefaultCollection --token $(PAT)
+
+    cd $(Build.SourcesDirectory)/`basename ${{ parameters.repo }}`
+    git checkout ${{ parameters.branch }}
+    npm i
+    node make.js build --task ${{ parameters.task }}
+    tfx build tasks upload --task-path _build/Tasks/${{ parameters.task }}
