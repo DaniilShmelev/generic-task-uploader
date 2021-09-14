@@ -8,6 +8,9 @@ parameters:
 - name: task
   displayName: The task to build and upload
   type: string
+- name: collection
+  displayName: URL of the collection the task will be uploaded to
+  default: https://abtttestorg.visualstudio.com/DefaultCollection
 
 trigger: none
 
@@ -29,7 +32,7 @@ steps:
     versionSpec: '15.x'
 - bash: |
     sudo npm i -g tfx-cli
-    tfx login --service-url https://v-dshmelev.visualstudio.com/DefaultCollection --token $(PAT)
+    tfx login --service-url ${{ parameters.collection }} --token $(PAT)
 
     cd $(Build.SourcesDirectory)/`basename ${{ parameters.repo }}`
     git checkout ${{ parameters.branch }}
