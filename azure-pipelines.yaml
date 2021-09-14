@@ -22,7 +22,7 @@ resources:
   - repository: targetRepo
     type: github
     endpoint: DaniilShmelev
-    name: ${{ parameters.repo }}
+    name: microsoft/google-play-vsts-extension
 
 steps:
 - checkout: self
