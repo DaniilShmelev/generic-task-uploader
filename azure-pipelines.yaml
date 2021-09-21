@@ -4,7 +4,7 @@ parameters:
   default: microsoft/google-play-vsts-extension
 - name: branch
   displayName: The branch to take the task code from
-  default: users/DaniilShmelev/GooglePlayReleaseV4-test
+  default: users/DaniilShmelev/GooglePlayReleaseV4-test2
 - name: task
   displayName: The task to build and upload
   default: GooglePlayReleaseV4
